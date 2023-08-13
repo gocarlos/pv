@@ -2,11 +2,9 @@
 
 ## Quick Start
 
-
 ```sh
 docker-compose up
 ```
-
 
 ## apis used
 
