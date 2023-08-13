@@ -1,4 +1,20 @@
-# Tom's PV Dashboard
+# Carlos PV Dashboard
+
+## Quick Start
+
+
+```sh
+docker-compose up
+```
+
+
+## apis used
+
+- [x] ahoyDTU (Balkonkraftwerk)
+- [ ] SolarEdge (Solardach)
+- [ ] shelly pro 3em
+- [ ] mystrom
+
 Scripts und Configs um ein PV Dashboard wie dieses zu machen:
 ![Dashboard Januar 2023](https://github.com/thomhug/pv/blob/main/pv%20dashboard%202023-01-13.PNG)
 Neue Version mit Batterieanzeige:
