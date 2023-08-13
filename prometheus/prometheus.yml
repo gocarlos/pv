@@ -38,46 +38,36 @@ scrape_configs:
       - targets: ['node_exporter:8000']
 
 
-  # - job_name: cham4
-  #   metrics_path: /probe
-  #   scrape_interval: 5s
-  #   scrape_timeout: 5s
-  #   params:
-  #     module: [mystromplug]
-  #   static_configs:
-  #     - targets:
-  #       - http://10.10.11.44/report
-  #       - http://10.10.11.45/report
-  #       - http://10.10.11.46/report
-  #       - http://10.10.11.47/report
-  #       - http://10.10.11.48/report
-  #   relabel_configs:
-  #     - source_labels: [__address__]
-  #       target_label: __param_target
-  #     - source_labels: [__param_target]
-  #       target_label: instance
-  #     - target_label: __address__
-  #       replacement: localhost:7979
-  #   metric_relabel_configs:
-  #     - source_labels: [instance]
-  #       regex: "http://10.10.11.44/report"
-  #       target_label: description
-  #       replacement: Test
-  #     - source_labels: [instance]
-  #       regex: "http://10.10.11.45/report"
-  #       target_label: description
-  #       replacement: Router
-  #     - source_labels: [instance]
-  #       regex: "http://10.10.11.46/report"
-  #       target_label: description
-  #       replacement: Gefrierschrank
-  #     - source_labels: [instance]
-  #       regex: "http://10.10.11.47/report"
-  #       target_label: description
-  #       replacement: Büro_myStrom
-  #     - source_labels: [instance]
-  #       regex: "http://10.10.11.48/report"
-  #       target_label: description
-  #       replacement: Netzwerk_Pi
-  #     - regex: instance
-  #       action: labeldrop
+  - job_name: cham4
+    metrics_path: /probe
+    scrape_interval: 5s
+    scrape_timeout: 5s
+    params:
+      module: [mystromplug]
+    static_configs:
+      - targets:
+        - http://192.168.0.56/report
+        - http://192.168.0.47/report
+        - http://192.168.0.63/report
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: localhost:7979
+    metric_relabel_configs:
+      - source_labels: [instance]
+        regex: "http://10.10.11.56/report"
+        target_label: description
+        replacement: Reduit
+      - source_labels: [instance]
+        regex: "http://10.10.11.47/report"
+        target_label: description
+        replacement: Kuehlschrank
+      - source_labels: [instance]
+        regex: "http://10.10.11.63/report"
+        target_label: description
+        replacement: Office
+      - regex: instance
+        action: labeldrop

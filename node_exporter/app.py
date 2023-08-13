@@ -44,24 +44,27 @@ def start_monitoring():
 
 def get_ahoy_dtu_metrics() -> AhoyDTUMetrics:
     logger.info('getting ahoy dtu metrics...')
-    response = requests.get('http://192.168.0.57/api/record/live')
-    inverter_0 = response.json()['inverter'][0]
-    inverter_1 = response.json()['inverter'][1]
-    inverter_2 = response.json()['inverter'][2]
+    
+    # response = requests.get('http://192.168.0.57/api/record/live').json()
+    inverter_0 = requests.get('http://192.168.0.57/api/inverter/id/0').json()['ch']
+    inverter_1 = requests.get('http://192.168.0.57/api/inverter/id/1').json()['ch']
+    inverter_2 = requests.get('http://192.168.0.57/api/inverter/id/2').json()['ch']
 
     inverter_0_metrics = InverterMetrics(
-        current_dc_power=float(inverter_0[2]['val']),
-        current_ac_power=float(inverter_0[8]['val'])
+        current_dc_power=float(response['inverter'][0][2]['val']),
+        current_ac_power=float(response['inverter'][0][8]['val']),
+        current_dc_0=('west', inverter_0[1][3]),
+        current_dc_1=('top', inverter_0[2][3])
     )
 
     inverter_1_metrics = InverterMetrics(
-        current_dc_power=float(inverter_1[2]['val']),
-        current_ac_power=float(inverter_1[8]['val'])
+        current_dc_power=float(response['inverter'][1][2]['val']),
+        current_ac_power=float(response['inverter'][1][8]['val'])
     )
 
     inverter_2_metrics = InverterMetrics(
-        current_dc_power=float(inverter_2[2]['val']),
-        current_ac_power=float(inverter_2[8]['val'])
+        current_dc_power=float(response['inverter'][2][2]['val']),
+        current_ac_power=float(response['inverter'][2][8]['val'])
     )
 
     ahoyMetrics = AhoyDTUMetrics(
